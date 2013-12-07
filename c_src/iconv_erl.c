@@ -113,7 +113,7 @@ static ErlDrvSSizeT iconv_drv_control(ErlDrvData drv_data,
    outleft = avail = 4*size;
    inleft = size;
    rtmp = rstring = driver_alloc(avail);
-   while (inleft > 0) {
+   while ((signed)inleft > 0) {
       if (iconv(cd, &stmp, &inleft, &rtmp, &outleft) == (size_t) -1) {
 	 if (invalid_utf8_as_latin1 && (*stmp & 0x80) && outleft >= 2) {
 	    /* Encode one byte of (assumed) Latin-1 into two bytes of UTF-8 */
